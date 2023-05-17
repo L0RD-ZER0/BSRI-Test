@@ -43,7 +43,7 @@ pub enum QuestionCategory {
 ///   test_core::answers::AnswerDomain::Range(1, 2),
 /// );
 ///
-/// println!("Serialized :: {}", q.to_json());
+/// println!("Serialized :: {}", q.to_json().unwrap());
 /// // returns Serialized :: {
 /// //   "statement": "statement",
 /// //   "category": "masculinity",
@@ -59,7 +59,7 @@ pub enum QuestionCategory {
 ///    "statement": "statement",
 ///    "category": "masculinity",
 ///    "answer_type": { "type": "range", "value": [1, 2] }
-/// }"#);
+/// }"#).unwrap();
 ///
 /// println!("Deserialized :: {:?}", q);
 /// // returns Debug :: Question { statement: "statement", category: Masculinity, answer_type: Range(1, 2) }
@@ -79,20 +79,20 @@ impl Question {
         }
     }
 
-    pub fn from_json(json: &str) -> Self {
-        json::from_str(json).unwrap()
+    pub fn from_json(json: &str) -> json::JsonResult<Self> {
+        json::from_str(json)
     }
 
-    pub fn from_json_slice(json: &[u8]) -> Self {
-        json::from_slice(json).unwrap()
+    pub fn from_json_slice(json: &[u8]) -> json::JsonResult<Self> {
+        json::from_slice(json)
     }
 
-    pub fn from_json_value(json: json::Value) -> Self {
-        json::from_value(json).unwrap()
+    pub fn from_json_value(json: json::Value) -> json::JsonResult<Self> {
+        json::from_value(json)
     }
 
-    pub fn to_json(&self) -> String {
-        json::to_str(self).unwrap()
+    pub fn to_json(&self) -> json::JsonResult<String> {
+        json::to_str(self)
     }
 }
 
@@ -124,7 +124,7 @@ mod tests {
             AnswerDomain::Range(1, 2),
         );
 
-        let json = q.to_json();
+        let json = q.to_json().unwrap();
 
         let serialized = concat!(
             "{",
@@ -168,7 +168,8 @@ mod tests {
             "category": "masculinity",
             "answer_type": { "type": "range", "value": [1, 2] }
         }"#,
-        );
+        )
+        .unwrap();
 
         assert_eq!(q.statement, "statement");
         assert!(matches!(q.category, QuestionCategory::Masculinity));
