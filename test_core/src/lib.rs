@@ -1,23 +1,13 @@
-pub mod questions;
 pub mod answers;
-
+pub mod questions;
 
 pub mod json {
     pub use serde::{Deserialize, Serialize};
-    pub use serde_json::{
-        Serializer,
-        Deserializer,
-        Value,
-        json,
-        from_str,
-        from_slice,
-        from_value,
-    };
+    pub use serde_json::{from_slice, from_str, from_value, json, Deserializer, Serializer, Value};
 
     #[cfg(debug_assertions)]
-    pub use serde_json::ser::{ PrettyFormatter as Formatter, to_string_pretty as to_str };
+    pub use serde_json::ser::{to_string_pretty as to_str, PrettyFormatter as Formatter};
 
     #[cfg(not(debug_assertions))]
-    pub use serde_json::ser::{ CompactFormatter as Formatter, to_string as to_str };
+    pub use serde_json::ser::{to_string as to_str, CompactFormatter as Formatter};
 }
-

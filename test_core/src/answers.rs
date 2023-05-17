@@ -1,8 +1,4 @@
-use crate::json::{
-    Serialize,
-    Deserialize,
-};
-
+use crate::json::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(tag = "type", content = "value", rename_all = "snake_case")]
@@ -15,7 +11,6 @@ pub enum AnswerDomain {
     Any,
     None,
 }
-
 
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(tag = "type", content = "value", rename_all = "snake_case")]
