@@ -1,0 +1,37 @@
+[workspace]
+members = [
+    "",
+    "test_core"
+]
+default-members = [
+    "",
+    "test_core"
+]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+authors = [
+    "L0RD-ZER0 <68327382+L0RD-ZER0@users.noreply.github.com>",
+]
+description = "A project to assist in conducting BSRI-Test over various platforms and media."
+edition = "2021"
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/L0RD-ZER0/BSIR-Test"
+
+[workspace.dependencies]
+test_core = { path = "test_core" }
+
+[package]
+name = "bsri-test"
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "bsri-test"
+path = "src/main.rs"
+
+[dependencies]
+test_core.workspace = true
+
